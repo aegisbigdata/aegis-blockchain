@@ -35,7 +35,7 @@ Change `PATH` variable to include the `fabric/bin` directory:
 
 Install Hyperledger Composer using `npm` (using `yarn` won't work):
 
-    npm install -g composer-cli composer-rest-server
+    npm install -g composer-cli@0.16.3 composer-rest-server@0.16.3
 
 ## 3. Create Crypto Materials
 
