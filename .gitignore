@@ -5,3 +5,6 @@ bin/composer-logs
 cards/*
 crypto-config/*
 !.gitkeep
+node_modules/*
+bin/*.card
+data/*

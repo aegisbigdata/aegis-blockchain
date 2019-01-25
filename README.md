@@ -35,16 +35,19 @@ Change `PATH` variable to include the `fabric/bin` directory:
 
 Install Hyperledger Composer using `npm` (using `yarn` won't work):
 
-    npm install -g composer-cli@0.16.3 composer-rest-server@0.16.3
+    cd aegis-blockchain
+    npm install
+
+*Note: Where `aegis-blockchain`  the directory you cloned this repository into.*
 
 ## 3. Create Crypto Materials
 
 We need to create MSP for all participants in our network.  This is done by running:
 
-    cd aegis-blockchain/bin
+    cd bin
     ./generateCertificates.sh
 
-*Note: All commands from now on, should be executed from within `aegis-blockchain/bin` directory, where `aegis-blockchain`  the directory you cloned this repository into.*
+*Note: All commands from now on, should be executed from within `aegis-blockchain/bin` directory*
 
 The configuration file for the participants can be found in  `config/crypto-config.yaml`
 
@@ -61,7 +64,7 @@ to generate the genesis block and a transaction creating a consortium channel (b
 We start the orderer and then the peer:
 
     ./startOrderer.sh --tls
-    ./startPeer bbc6.sics.se --tls
+    ./startPeer.sh bbc6.sics.se --tls
 
 - `bbc6.sics.se` is the name of the peer we want to start (as used in steps 3 and 4),
 - `--tls` can be ommited, but is highly recommended to be used
@@ -80,9 +83,9 @@ Initialize the peer (join the network and the consortium channel):
 
 We enter the `business-network/` directory and build the business network archive:
 
-    composer archive create -t dir -n .
+    ../node_modules/composer-cli/cli.js archive create -t dir -n .
 
-- filename should be `aegis-business-network@0.0.1.bna`,
+- filename should be `aegis-business-network@1.0.0.bna`,
 - this step is only needed once,
 
 We move back to `bin/` directory to initialize and install composer network files.
@@ -111,7 +114,7 @@ does the following:
 
 To start the REST server, you only need to run:
 
-    composer-rest-server -c administrator@aegis-business-network -n required -w true -t true -e /usr/lib/node_modules/composer-rest-server/cert.pem -k /usr/lib/node_modules/composer-rest-server/key.pem
+    npx composer-rest-server -c administrator@aegis-business-network -n required -w true -t true -e ../node_modules/composer-rest-server/cert.pem -k ../node_modules/composer-rest-server/key.pem
 
 
 - The command starts the rest server, using the default certificate/key for use with TLS. This should only be used for development/testing purposes only.  For production, you need to generate and provide the server with proper certificates.
@@ -140,7 +143,3 @@ rm ../cards/*
 rm -rf ../data
 rm -rf ~/.composer
 ```
-
-## 12. Updates
-
-Documentation on how to update the network, adding new organizations, orderers and peers and how to update the business network will be provided in a future release.
