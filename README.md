@@ -83,9 +83,10 @@ Initialize the peer (join the network and the consortium channel):
 
 We enter the `business-network/` directory and build the business network archive:
 
+    npm install
     ../node_modules/composer-cli/cli.js archive create -t dir -n .
 
-- filename should be `aegis-business-network@1.0.0.bna`,
+- filename should be `aegis-business-network@1.1.0.bna`,
 - this step is only needed once,
 
 We move back to `bin/` directory to initialize and install composer network files.
@@ -100,7 +101,7 @@ does the following:
 
 - creates and imports a card for the peer administrator (`PeerAdmin@aegis-network.card` saved in `cards/` directory),
 - installs the runtime of Hyperledger Composer to the peer,
-- loads the business network built in (7) to the peer (if the name is different than `aegis-business-network@0.0.1.bna` adjust `initComposer.sh` accordingly),
+- loads the business network built in (7) to the peer (if the name is different than `aegis-business-network@1.1.0.bna` adjust `initComposer.sh` accordingly),
 - creates and imports a card for the business network (`administrator@aegis-business-network.card` saved in `cards/` directory),
 - pings the network using the card to see that everything is OK
 
@@ -140,6 +141,8 @@ to stop and remove all images and containers.  In order to remove created cards,
 
 ```bash
 rm ../cards/*
+rm ../crypto-config/*
+rm ../artifacts/*
 rm -rf ../data
 rm -rf ~/.composer
 ```
